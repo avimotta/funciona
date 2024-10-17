@@ -1,8 +1,7 @@
-import { Preferences } from "@capacitor/preferences";
+import { Preferences } from '@capacitor/preferences';
 
 function hideAllSections() {
     Array.from(document.querySelectorAll(".game")).concat([document.getElementById("main"), document.getElementById("perfil")])
-    ["main", "perfil", "g1", "g2", "g3"]
         .forEach (element => element.classList.add("nodisp"));
 }
 
@@ -11,13 +10,14 @@ function showSection(sectionId) {
 }
 
 function setupButtons() {
-    ["g1", "g2", "g3"]
+    document.querySelectorAll(".game")
         .forEach(elementId => {
-            document.getElementById(`btn-${elementId}`).addEventListener("click", () => {
+            const id = elementId.getAttribute("id");
+            document.getElementById(`btn-${id}`).addEventListener("click", () => {
                 hideAllSections();
-                showSection(elementId);
+                showSection(id);
             });
-            document.getElementById(`btn-${elementId}-back`).addEventListener("click", () => {
+            document.getElementById(`btn-${id}-back`).addEventListener("click", () => {
                 hideAllSections();
                 showSection("main");
             });
@@ -46,7 +46,6 @@ function initApp() {
             hideAllSections();
             showSection("main");
         }
-        alert(`config = ${JSON.stringify(config)}`)
     });
 }
 
@@ -66,4 +65,4 @@ document.getElementById("savePreferences").addEventListener("click", e => {
     }
 });
 
-document.addEventListener("DOMContentLoaded", initApp);
+document.addEventListener("DOMContentLoaded", initApp());
