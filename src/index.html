@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>funciona</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/tateti.css">
-    <link rel="stylesheet" href="./css/generala.css">
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/tateti.css" />
+    <link rel="stylesheet" href="./css/generala.css" />
 </head>
 <body>
     <div id="main">
@@ -16,18 +16,7 @@
         <button id="btn-g3">juego 3</button>
     </div>
     
-    <div id="perfil" class="nodisp">
-        <h2>perfil</h2>
-        <form>
-            <label for="name">nombre: </label>
-            <input id="name" name="name" />
-            <br>
-            <label for="nick">apodo: </label>
-            <input id="nick" name="nick" />
-            <br>
-            <input id="savePreferences" type="submit" value="Guardar">
-        </form>
-    </div>
+
     <div id="g1" class="game nodisp">
         <button id="btn-g1-back">volver</button>
 
@@ -53,15 +42,48 @@
     </div>
 
     <div id="g2" class="game nodisp">
-        <button id="btn-g2-back">volver</button>
-        <h2>generala</h2>
-        <div class="container-generala">
-            <div class="dado d0"></div>
-            <div class="dado d1"></div>
-            <div class="dado d2"></div>
-            <div class="dado d3"></div>
-            <div class="dado d4"></div>
-            <button id="vaso">TIRAR DADOS</button>
+        <div class="game-cont">
+            <button id="btn-g2-back">Volver</button>
+            <h1>Generala</h1>
+        
+            <p id="turno">Turno de: <span id="player-generala">1</span>, tiros: <span id="moves-generala"></span></p>
+            
+            <div class="container-generala">
+                <div class="dados dado-1"></div>
+                <div class="dados dado-2"></div>
+                <div class="dados dado-3"></div>
+                <div class="dados dado-4"></div>
+                <div class="dados dado-5"></div>
+            </div>
+
+            <div id="controles">
+                <button id="roll-btn">Mezclar</button>
+            </div>
+            <div class="scores">
+                <table border="1">
+                    <thead>
+                        <tr></tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-ocupado-generala" id="modal-ocupado">
+        <div id="modal-ocupado-contenido-generala">
+            <span class="close">&times;</span>
+            <p>Esa celda ya está ocupada.</p>
+        </div>
+    </div>
+    
+    <div id="modal-ganaste" class="modal-ganaste-generala">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>¡Juego Terminado!</h2>
+            <p id="ganador-texto"></p>
         </div>
     </div>
     
