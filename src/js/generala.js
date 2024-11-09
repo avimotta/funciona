@@ -4,6 +4,11 @@ const AT_QUARTER = 0.25 * DICE_SIZE;
 const AT_HALF = 0.5 * DICE_SIZE;
 const AT_3QUARTER = 0.75 * DICE_SIZE
 
+const modalConfirm = document.getElementById("modal-confirm");
+const modalConfirmMessage = document.getElementById("modal-confirm-message");
+const confirmAddX = document.getElementById("confirmAddX");
+const cancelAddX = document.getElementById("cancelAddX");
+
 const game = {
     dices: [0, 0, 0, 0, 0],
     selectedDices: [false, false, false, false, false],
@@ -24,12 +29,12 @@ const initGame = () => {
     game.selectedDices = [false, false, false, false, false];
     game.turn = 1;
     game.moves = 0;
-
-    // Initialize scores as a 2D array
     game.scores = [];
+    game.round = 1;
+
     for (let p = 0; p < game.players; p++) {
-        game.scores[p] = Array(12).fill(" "); // Create array for each player with 12 spaces
-        game.scores[p][11] = 0; // Set the total (last position) to 0
+        game.scores[p] = Array(12).fill(" "); 
+        game.scores[p][11] = 0; 
     }
 
     document.querySelectorAll(".container-generala .dados").forEach((diceElement, i) => {
@@ -42,7 +47,7 @@ const initGame = () => {
 }
 
 const drawScores = () => {
-    // Header
+    // header
     const contHeader = document.querySelector("#g2 .scores table thead tr");
     contHeader.innerHTML = "";
     const cellGame = document.createElement("th");
@@ -55,11 +60,11 @@ const drawScores = () => {
         contHeader.appendChild(cellPlayerName);
     }
 
-    // Games
+    // juegos
     const contGames = document.querySelector("#g2 .scores table tbody");
-    contGames.innerHTML = ""; // Clear existing content
+    contGames.innerHTML = ""; 
     
-    // Add rows for each game (0-10)
+    // fila para cada juego
     for (let j = 0; j < 11; j++) {
         const contGame = document.createElement("tr");
         const cellGameName = document.createElement("th");
@@ -70,26 +75,51 @@ const drawScores = () => {
             const cellPlayerScore = document.createElement("td");
             cellPlayerScore.innerHTML = game.scores[p][j];
             contGame.appendChild(cellPlayerScore);
+
+            if (p === game.turn - 1) {
+                cellPlayerScore.classList.add("markPlayerTurn");
+            }
         }
+
         contGames.appendChild(contGame);
         contGame.addEventListener("click", () => {
             if (game.dices.some(dice => dice === 0)) {
                 return;
-            };
+            }
+       
             if (game.scores[game.turn - 1][j] !== " ") {
                 document.getElementById("modal-ocupado").style.display = "block";
                 return;
             } else {
-                const score = calcScore(j);
-                game.scores[game.turn - 1][j] = score === 0 ? "X" : score;
-                game.scores[game.turn - 1][11] += score;
-                drawScores();
-                changeTurn();
-            }
+                const score = calcScore(j); // Cambia calcScore por calculateScore si es necesario
+       
+                if (score === 0) {
+                    modalConfirm.style.display = "block";
+                    modalConfirmMessage.innerHTML = `No tiene el juego ${getGameName(j)}. ¿Quiere tacharlo?`;
+                   
+                    confirmAddX.onclick = () => {
+                        modalConfirm.style.display = "none";
+                        game.scores[game.turn - 1][j] = "X"; // Marca como tachado
+                        changeTurn();
+                        drawScores();
+                    };
+       
+                    cancelAddX.onclick = () => {
+                        modalConfirm.style.display = "none";
+                    };
+                   
+                } else {
+                    game.scores[game.turn - 1][j] = score;
+                    game.scores[game.turn - 1][11] += score;
+                    changeTurn();
+                    drawScores();
+                };
+            };
         });
     };
+ 
     
-    // Total row
+    //fila del total
     const contTotal = document.createElement("tr");
     const cellTotalName = document.createElement("th");
     cellTotalName.innerHTML = "total";
@@ -106,7 +136,7 @@ const drawScores = () => {
         document.getElementById("modal-ocupado").style.display = "none";
     };
     
-    // Close modal if clicked outside
+
     window.onclick = function(event) {
         if (event.target === document.getElementById("modal-ocupado")) {
             document.getElementById("modal-ocupado").style.display = "none";
@@ -166,7 +196,7 @@ const drawDices = () => {
     game.dices.forEach((dice, i) => {
         const diceElement = document.querySelector(`.container-generala .dado-${i + 1}`);
         if (diceElement) {
-            showDice(diceElement, dice);  // Call showDice to render the dice
+            showDice(diceElement, dice);
             if (game.selectedDices[i]) {
                 diceElement.classList.add("dadosSeleccionados");
             } else {
@@ -182,7 +212,7 @@ const drawState = () => {
 }
 
 const rollDices = () => {
-    if (game.moves >= 3) return;  // Evita tirar más de 3 veces
+    if (game.moves >= 3) return; 
     for (let i = 0; i < game.dices.length; i++) {
         if (game.moves === 0 || (game.moves > 0 && !game.selectedDices[i])) {
             game.dices[i] = Math.floor(Math.random() * 6) + 1;
@@ -190,6 +220,7 @@ const rollDices = () => {
     }
     drawDices();
     game.moves++;
+    if (game.moves === 1) document.getElementById("btn-g2-back").setAttribute("disabled", "disabled");
     if (game.moves === 3) document.getElementById("roll-btn").setAttribute("disabled", "disabled");
     drawState();
 };
@@ -199,6 +230,7 @@ const changeTurn = () => {
     game.selectedDices = [false, false, false, false, false];
     game.moves = 0;
     game.turn++;
+    
     if(game.turn > game.players) {
         game.turn = 1;
         game.round++;
@@ -216,10 +248,10 @@ const gameOver = () => {
     document.getElementById("roll-btn").setAttribute("disabled", "disabled");
 
     let winner = 0;
-    let winningScore = game.scores[0][11]; // Inicializa con el puntaje del primer jugador
+    let winningScore = game.scores[0][11]; // primero con el puntaje del primer jugador
     let empate = false;
 
-    // Determinar el jugador con el puntaje más alto
+    // el más alto??
     for (let i = 1; i < game.players; i++) {
         if (game.scores[i][11] > winningScore) {
             winningScore = game.scores[i][11];
@@ -230,27 +262,43 @@ const gameOver = () => {
         }
     }
 
-    // Crear el mensaje del ganador o empate
     const mensajeGanador = empate
         ? `¡Es un empate con ${winningScore} puntos!`
         : `Ganó el Jugador ${winner + 1} con ${winningScore} puntos`;
 
-    // Mostrar el mensaje en el modal
     document.getElementById("ganador-texto").innerHTML = mensajeGanador;
     document.getElementById("modal-ganaste").style.display = "block";
+    reinitGenerala.onclick = () => {
+        initGame();
+        document.getElementById("modal-ganaste").style.display = "none";
+    };
+
+    goBackGenerala.onclick = () => {
+        document.getElementById("modal-ganaste").style.display = "none";
+        hideAllSections();
+        showSection("main");
+        initGame();
+    };
 };
 
-// Función para cerrar el modal al hacer clic en el botón de cerrar
 document.querySelector(".modal-ganaste-generala .close").onclick = function() {
     document.getElementById("modal-ganaste").style.display = "none";
 };
 
-// Cerrar el modal si se hace clic fuera de él
 window.onclick = function(event) {
     if (event.target === document.getElementById("modal-ganaste")) {
         document.getElementById("modal-ganaste").style.display = "none";
     }
 };
+
+function hideAllSections() {
+    Array.from(document.querySelectorAll(".game")).concat([document.getElementById("main")])
+        .forEach (element => element.classList.add("nodisp"));
+}
+
+function showSection(sectionId) {
+    document.getElementById(sectionId).classList.remove("nodisp");
+}
 
 const getGameName = whichGame => {
     const games = ['1', '2', '3', '4', '5', '6', 'E', 'F', 'P', 'G', 'D'];

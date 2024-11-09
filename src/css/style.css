@@ -8,10 +8,6 @@ body {
   display: none !important;
 }
 
-#g1 {
-  background-color: red;
-}
-
 #g2 {
   background-color: rgb(2, 91, 0);
   color: white;

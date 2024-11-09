@@ -57,7 +57,7 @@
             </div>
 
             <div id="controles">
-                <button id="roll-btn">Mezclar</button>
+                <button id="roll-btn">Tirar</button>
             </div>
             <div class="scores">
                 <table border="1">
@@ -79,13 +79,23 @@
         </div>
     </div>
     
-    <div id="modal-ganaste" class="modal-ganaste-generala">
+    <div  class="modal-ganaste-generala" id="modal-ganaste">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>¡Juego Terminado!</h2>
             <p id="ganador-texto"></p>
+            <button id="reinitGenerala">Reiniciar</button>
+            <button id="goBackGenerala">Volver</button>
         </div>
     </div>
+
+    <div id="modal-confirm" class="modal-confirm-generala">
+        <div class="modal-content">
+          <p id="modal-confirm-message">¿Quieres colocar una X aquí?</p>
+          <button id="confirmAddX">Sí</button>
+          <button id="cancelAddX">No</button>
+        </div>
+      </div>
     
     <div id="g3" class="game nodisp">
         <button id="btn-g3-back">volver</button>
