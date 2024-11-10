@@ -144,3 +144,9 @@ h2 {
     background-color: #FFD700; 
     font-weight: bold;
 }
+
+.potential-score {
+    background-color: #e6ffe6;  /* Light green background */
+    cursor: pointer;            /* Show clickable cursor */
+    transition: all 0.3s;       /* Smooth transition for hover effect */
+}

@@ -2,12 +2,14 @@ const DICE_SIZE = 100;
 const DOT_RADIUS = 0.1 * DICE_SIZE;
 const AT_QUARTER = 0.25 * DICE_SIZE;
 const AT_HALF = 0.5 * DICE_SIZE;
-const AT_3QUARTER = 0.75 * DICE_SIZE
+const AT_3QUARTER = 0.75 * DICE_SIZE;
 
 const modalConfirm = document.getElementById("modal-confirm");
 const modalConfirmMessage = document.getElementById("modal-confirm-message");
 const confirmAddX = document.getElementById("confirmAddX");
 const cancelAddX = document.getElementById("cancelAddX");
+const reinitGenerala = document.getElementById("reinitGenerala");
+const goBackGenerala = document.getElementById("goBackGenerala");
 
 const game = {
     dices: [0, 0, 0, 0, 0],
@@ -37,6 +39,13 @@ const initGame = () => {
         game.scores[p][11] = 0; 
     }
 
+    // copia nueva de cada dado para que cuando se reinicie no se interpongan los viejos listeners
+    document.querySelectorAll(".container-generala .dados").forEach((diceElement) => {
+        const newElement = diceElement.cloneNode(true);
+        diceElement.parentNode.replaceChild(newElement, diceElement);
+    });
+
+    // agregar nuevos listeners a las nuevas copias
     document.querySelectorAll(".container-generala .dados").forEach((diceElement, i) => {
         diceElement.addEventListener("click", () => toggleDiceSelection(i));
     });
@@ -147,6 +156,36 @@ const isGameMatch = regex => {
     return game.dices.slice().sort((d1, d2) => d1 - d2).join("").match(regex) !== null;//hago una copia del array, lo ordena, lo convierte en un string y lo matchea con la expresion regular de la generala
 }
 
+const highlightPossibleScores = () => {
+    // Remove previous highlights
+    document.querySelectorAll('.potential-score').forEach(cell => {
+        cell.classList.remove('potential-score');
+    });
+
+    // Only highlight if there are actual dice values (not all zeros)
+    if (game.dices.some(dice => dice === 0)) return;
+
+    // Get all score cells for current player
+    const scoreCells = document.querySelectorAll('#g2 .scores table tbody tr');
+    
+    // Check each possible game (0-10)
+    scoreCells.forEach((row, index) => {
+        if (index >= 11) return; // Skip total row
+        
+        // Get the cell for current player
+        const playerCell = row.children[game.turn];
+        
+        // Only proceed if the cell is empty (contains space)
+        if (playerCell && playerCell.textContent.trim() === "") {
+            const score = calcScore(index);
+            if (score > 0) { // Only highlight if there's a positive score
+                playerCell.classList.add('potential-score');
+                // Optionally show the potential score
+            }
+        }
+    });
+};
+
 const calcScore = whichGame => {
     let score = 0;
     switch (whichGame) {
@@ -223,6 +262,8 @@ const rollDices = () => {
     if (game.moves === 1) document.getElementById("btn-g2-back").setAttribute("disabled", "disabled");
     if (game.moves === 3) document.getElementById("roll-btn").setAttribute("disabled", "disabled");
     drawState();
+
+    highlightPossibleScores();
 };
 
 const changeTurn = () => {
@@ -268,6 +309,7 @@ const gameOver = () => {
 
     document.getElementById("ganador-texto").innerHTML = mensajeGanador;
     document.getElementById("modal-ganaste").style.display = "block";
+    
     reinitGenerala.onclick = () => {
         initGame();
         document.getElementById("modal-ganaste").style.display = "none";
@@ -313,13 +355,6 @@ const toggleDiceSelection = diceNumber => {
         diceElement.classList.add("dadosSeleccionados");
     } else {
         diceElement.classList.remove("dadosSeleccionados");
-    }
-};
-
-const changeSelection = (index) => {
-    if (game.moves > 1 && game.moves <= 3) {
-        game.selectedDices[index] = !game.selectedDices[index];
-        drawDices();
     }
 };
 
