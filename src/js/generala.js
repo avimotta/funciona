@@ -4,12 +4,16 @@ const AT_QUARTER = 0.25 * DICE_SIZE;
 const AT_HALF = 0.5 * DICE_SIZE;
 const AT_3QUARTER = 0.75 * DICE_SIZE;
 
-const modalConfirm = document.getElementById("modal-confirm");
+const modalConfirm = document.getElementById("modal-confirm-generala");
 const modalConfirmMessage = document.getElementById("modal-confirm-message");
-const confirmAddX = document.getElementById("confirmAddX");
-const cancelAddX = document.getElementById("cancelAddX");
-const reinitGenerala = document.getElementById("reinitGenerala");
-const goBackGenerala = document.getElementById("goBackGenerala");
+const confirmAddX = document.getElementById("confirm-add-x");
+const cancelAddX = document.getElementById("cancel-add-x");
+const reinitGenerala = document.getElementById("reinit-generala");
+const goBackGenerala = document.getElementById("go-back-generala");
+const modalTachar = document.getElementById("modal-tachar-generala");
+const modalAnotar = document.getElementById("modal-anotar-generala");
+const modalGanaste = document.getElementById("modal-ganaste-generala");
+const modalOcupado = document.getElementById("modal-ocupado-generala");
 
 const game = {
     dices: [0, 0, 0, 0, 0],
@@ -97,7 +101,7 @@ const drawScores = () => {
             }
        
             if (game.scores[game.turn - 1][j] !== " ") {
-                document.getElementById("modal-ocupado").style.display = "block";
+                modalOcupado.style.display = "block";
                 return;
             } else {
                 const score = calcScore(j); // Cambia calcScore por calculateScore si es necesario
@@ -116,16 +120,34 @@ const drawScores = () => {
                     cancelAddX.onclick = () => {
                         modalConfirm.style.display = "none";
                     };
+
+                    if (getGameName(j) === "G" && game.scores[game.turn - 1][10] !== "X") {
+                        modalTachar.style.display = "block";
+                        document.querySelector(".modal-tachar-generala .close").onclick = function() {
+                            document.getElementById("modal-tachar-generala").style.display = "none";
+                        };
+                        modalConfirm.style.display = "none";
+                    }
                    
-                } else {
-                    game.scores[game.turn - 1][j] = score;
-                    game.scores[game.turn - 1][11] += score;
-                    changeTurn();
-                    drawScores();
-                };
-            };
+                    } else {
+                    if (getGameName(j) === "D" && game.scores[game.turn - 1][9] === " ") {
+                        // Show modal to indicate that Generala must be scored first
+                        modalAnotar.style.display = "block";
+                        document.querySelector(".modal-anotar-generala .close").onclick = function() {
+                            document.getElementById("modal-anotar-generala").style.display = "none";
+                        };
+                        return; // Prevent scoring until user closes modal
+                    } else {
+                        game.scores[game.turn - 1][j] = score;
+                        game.scores[game.turn - 1][11] += score;
+                        changeTurn();
+                        drawScores();
+                    }
+                }
+            }
         });
-    };
+    }
+
  
     
     //fila del total
@@ -142,13 +164,13 @@ const drawScores = () => {
 };
 
     document.querySelector(".modal-ocupado-generala .close").onclick = function() {
-        document.getElementById("modal-ocupado").style.display = "none";
+        modalOcupado.style.display = "none";
     };
     
 
     window.onclick = function(event) {
         if (event.target === document.getElementById("modal-ocupado")) {
-            document.getElementById("modal-ocupado").style.display = "none";
+            modalOcupado.style.display = "none";
     };
 };
 
@@ -308,15 +330,15 @@ const gameOver = () => {
         : `Ganó el Jugador ${winner + 1} con ${winningScore} puntos`;
 
     document.getElementById("ganador-texto").innerHTML = mensajeGanador;
-    document.getElementById("modal-ganaste").style.display = "block";
+    modalGanaste.style.display = "block";
     
     reinitGenerala.onclick = () => {
         initGame();
-        document.getElementById("modal-ganaste").style.display = "none";
+        modalGanaste.style.display = "none";
     };
 
     goBackGenerala.onclick = () => {
-        document.getElementById("modal-ganaste").style.display = "none";
+        modalGanaste.style.display = "none";
         hideAllSections();
         showSection("main");
         initGame();
@@ -324,13 +346,7 @@ const gameOver = () => {
 };
 
 document.querySelector(".modal-ganaste-generala .close").onclick = function() {
-    document.getElementById("modal-ganaste").style.display = "none";
-};
-
-window.onclick = function(event) {
-    if (event.target === document.getElementById("modal-ganaste")) {
-        document.getElementById("modal-ganaste").style.display = "none";
-    }
+    modalGanaste.style.display = "none";
 };
 
 function hideAllSections() {
@@ -372,7 +388,7 @@ const showDices = (contDiv, number) => {
 const drawDot = (ctx, x, y) => {
     ctx.beginPath();
     ctx.arc(x, y, DOT_RADIUS, 0, 2 * Math.PI, false);
-    ctx.fillStyle = "#000000";
+    ctx.fillStyle = "#F48B89";
     ctx.fill();
     ctx.closePath();
 }
@@ -388,17 +404,27 @@ const showDice = (contDiv, number) => {
  
 const drawDice = (cont, number) => {
     let ctx = cont.getContext("2d");
+    const radius = 20; // Radio de las esquinas redondeadas
  
     // Borro
     ctx.clearRect(0, 0, DICE_SIZE, DICE_SIZE);
  
-    // Dado
+    // Dibujo el dado con bordes redondeados
     ctx.beginPath();
-    ctx.rect(0, 0, DICE_SIZE, DICE_SIZE);
-    ctx.fillStyle = "#ffffff";
+    ctx.moveTo(radius, 0); // Esquina superior izquierda
+    ctx.lineTo(DICE_SIZE - radius, 0); // Línea superior
+    ctx.arcTo(DICE_SIZE, 0, DICE_SIZE, radius, radius); // Esquina superior derecha
+    ctx.lineTo(DICE_SIZE, DICE_SIZE - radius); // Línea derecha
+    ctx.arcTo(DICE_SIZE, DICE_SIZE, DICE_SIZE - radius, DICE_SIZE, radius); // Esquina inferior derecha
+    ctx.lineTo(radius, DICE_SIZE); // Línea inferior
+    ctx.arcTo(0, DICE_SIZE, 0, DICE_SIZE - radius, radius); // Esquina inferior izquierda
+    ctx.lineTo(0, radius); // Línea izquierda
+    ctx.arcTo(0, 0, radius, 0, radius); // Esquina superior izquierda
+    ctx.fillStyle = "#FFE5B4";
     ctx.fill();
     ctx.closePath();
  
+    // Dibujo los puntos según el número
     switch (number) {
         case 1:
             drawDot(ctx, AT_HALF, AT_HALF);
@@ -433,7 +459,8 @@ const drawDice = (cont, number) => {
             drawDot(ctx, AT_QUARTER, AT_HALF);
             drawDot(ctx, AT_3QUARTER, AT_HALF);
     }
-}
+};
+
 /* Draw dices code ends */
 
 document.getElementById("roll-btn").addEventListener("click", rollDices);

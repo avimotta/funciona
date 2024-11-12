@@ -1,25 +1,24 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+:root {
+    --mint-green: #7DCEA0;
+    --coral-pink: #F48B89;
+    --cream-yellow: #FFE5B4;
+    --dark-text: #333333;
 }
 
 #g2 {
-    background-color: #2c3e50;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
-}
-
-h2 {
-    color: #ecf0f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Para centrar verticalmente */
+    background-color: var(--coral-pink);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     text-align: center;
-    font-size: 2em;
-    margin-bottom: 20px;
+    min-height: 100vh; /* Hace que ocupe toda la pantalla */
+    margin: 0 auto; /* Centrado horizontal */
+    width: 80%;
+    max-width: 600px;
 }
 
 .container-generala {
@@ -31,14 +30,14 @@ h2 {
 }
 
 .dado {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     background-color: #ecf0f1;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     color: #2c3e50;
     cursor: pointer;
@@ -46,50 +45,23 @@ h2 {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-.dado:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 8px rgba(0,0,0,0.15);
-}
-
 .dadosSeleccionados {
-    background-color: #3498db;
-    color: #fff;
+    background-color: var(--mint-green);
     transform: scale(1.1);
+    border-radius: 1em;
 }
 
 #roll-btn {
-    display: block;
-    width: 100%;
+    display: block; /* Asegura que tome todo el ancho disponible */
+    margin: 1em auto; /* Centra horizontalmente */
+    width: 70%;
     padding: 10px;
-    font-size: 18px;
-    color: #fff;
-    background-color: #e74c3c;
+    font-size: 16px;
+    color: var(--dark-text);
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-}
-
-#roll-btn:hover {
-    background-color: #c0392b;
-}
-
-#btn-g2-back {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    padding: 5px 10px;
-    font-size: 14px;
-    color: #ecf0f1;
-    background-color: #34495e;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#btn-g2-back:hover {
-    background-color: #2c3e50;
+    margin-top: 20px;
 }
 
 #g2 .scores table tbody tr {
@@ -118,21 +90,27 @@ h2 {
 
 .modal-ganaste-generala,
 .modal-ocupado-generala,
-.modal-confirm-generala {
+.modal-confirm-generala,
+.modal-tachar-generala,
+.modal-anotar-generala {
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    background-color: var(--cream-yellow);
+    padding: 1em;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     z-index: 1000;
+    text-align: center;
 }
 
 #modal-ganaste .close,
 #modal-ocupado .close,
-#modal-confirm .close {
+#modal-confirm .close 
+#modal-tachar .close,
+#modal-anotar .close {
     cursor: pointer;
     position: absolute;
     top: 10px;
@@ -146,7 +124,36 @@ h2 {
 }
 
 .potential-score {
-    background-color: #e6ffe6;  /* Light green background */
+    background-color: var(--mint-green);  /* Light green background */
     cursor: pointer;            /* Show clickable cursor */
     transition: all 0.3s;       /* Smooth transition for hover effect */
+}
+
+table {
+    margin: 0 auto; /* Centra horizontalmente */
+    border-collapse: collapse;
+    border-radius: 2em;
+    background-color: var(--cream-yellow);
+    margin-top: 2em; /* Ajustar separación superior */
+}
+
+#g2 .scores table {
+    width: 90%;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#g2 .scores table th,
+#g2 .scores table td {
+    padding: 8px;
+    border: 2px solid var(--coral-pink);
+    color: var(--dark-text);
+    font-size: 1.5em;
+}
+
+#g2 .scores table tbody tr td {
+    color: var(--coral-pink);
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
 }

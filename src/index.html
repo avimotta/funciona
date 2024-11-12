@@ -7,21 +7,25 @@
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/tateti.css" />
     <link rel="stylesheet" href="./css/generala.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oi&family=Sen:wght@400..800&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="main">
         <h2>mis juegos</h2>
-        <button id="btn-g1">juego 1</button>
-        <button id="btn-g2">juego 2</button>
-        <button id="btn-g3">juego 3</button>
+        <button class="btn" id="btn-g1">ta-te-ti</button>
+        <button class="btn" id="btn-g2">generala</button>
+        <button class="btn" id="btn-g3">próximamente</button>
     </div>
     
-
     <div id="g1" class="game nodisp">
         <button id="btn-g1-back">volver</button>
 
         <h1>Ta-Te-Ti</h1>
     
+        <p>Turno de: <span id="jugador">x</span></p>
+
         <div id="tablero">
             <div class="celda"></div>
             <div class="celda"></div>
@@ -34,16 +38,21 @@
             <div class="celda"></div>
         </div>
     
-        <p>Turno de: <span id="jugador">x</span></p>
+        <div  class="modal-ganaste-tateti" id="modal-ganaste-tateti">
+            <div class="modal-content">
+                <h1>¡Juego Terminado!</h1>
+                <p id="ganador-texto-tateti"></p>
+                <button id="reinit-tateti">reiniciar</button>
+                <button id="go-back-tateti">volver</button>
+            </div>
+        </div>
 
-        <h2 class="ganador"></h2>
-
-        <button id="reset" disabled>Reiniciar</button>
+        <button id="reset" disabled>reiniciar</button>
     </div>
 
     <div id="g2" class="game nodisp">
         <div class="game-cont">
-            <button id="btn-g2-back">Volver</button>
+            <button id="btn-g2-back">volver</button>
             <h1>Generala</h1>
         
             <p id="turno">Turno de: <span id="player-generala">1</span>, tiros: <span id="moves-generala"></span></p>
@@ -57,10 +66,10 @@
             </div>
 
             <div id="controles">
-                <button id="roll-btn">Tirar</button>
+                <button id="roll-btn">tirar dados!</button>
             </div>
             <div class="scores">
-                <table border="1">
+                <table>
                     <thead>
                         <tr></tr>
                     </thead>
@@ -72,31 +81,45 @@
         </div>
     </div>
 
-    <div class="modal-ocupado-generala" id="modal-ocupado">
-        <div id="modal-ocupado-contenido-generala">
+    <div class="modal-ocupado-generala" id="modal-ocupado-generala">
+        <div class="modal-content">
             <span class="close">&times;</span>
-            <p>Esa celda ya está ocupada.</p>
+            <p>esa celda ya está ocupada D:</p>
         </div>
     </div>
     
-    <div  class="modal-ganaste-generala" id="modal-ganaste">
+    <div  class="modal-ganaste-generala" id="modal-ganaste-generala">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>¡Juego Terminado!</h2>
+            <h2>¡juego terminado!</h2>
             <p id="ganador-texto"></p>
-            <button id="reinitGenerala">Reiniciar</button>
-            <button id="goBackGenerala">Volver</button>
+            <button id="reinit-generala">reiniciar</button>
+            <button id="go-back-generala">volver</button>
         </div>
     </div>
 
-    <div id="modal-confirm" class="modal-confirm-generala">
+    <div class="modal-confirm-generala" id="modal-confirm-generala">
         <div class="modal-content">
-          <p id="modal-confirm-message">¿Quieres colocar una X aquí?</p>
-          <button id="confirmAddX">Sí</button>
-          <button id="cancelAddX">No</button>
+          <p id="modal-confirm-message">¿querés tachar acá?</p>
+          <button id="confirm-add-x">Sí</button>
+          <button id="cancel-add-x">No</button>
         </div>
       </div>
-    
+
+    <div class="modal-tachar-generala" id="modal-tachar-generala">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>no se puede tachar generala sin tachar la doble</p>
+        </div>
+    </div>
+
+    <div class="modal-anotar-generala" id="modal-anotar-generala">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>no se puede anotar doble sin anotar la generala</p>
+        </div>
+    </div>
+
     <div id="g3" class="game nodisp">
         <button id="btn-g3-back">volver</button>
         <h2>juego 3</h2>
