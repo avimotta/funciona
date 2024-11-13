@@ -11,6 +11,7 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     text-align: center;
     padding: 0.5em;
+    padding-top: 0;
     border: 3px solid #71a497;
 }
 
@@ -90,3 +91,53 @@ button:disabled {
     color: var(--dark-text);
     font-size: 1.2rem;
 }
+
+#header-tateti {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centra el título "Tateti" */
+    position: relative;
+}
+
+@media (orientation: landscape) {
+        #g1 {
+            padding: 0.3em;
+            font-size: 0.8rem;
+            border-radius: 15px;
+        }
+    
+        #tablero {
+            grid-template-columns: repeat(3, 80px);
+            grid-template-rows: repeat(3, 80px);
+            gap: 5px;
+            padding: 5px;
+        }
+    
+        .celda {
+            font-size: 2em;
+            border-radius: 15px;
+        }
+    
+        .modal-ganaste-tateti {
+            padding: 1.5rem;
+            font-size: 1.2rem;
+        }
+    
+        #ganador-texto-tateti {
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }
+    
+        #jugador {
+            font-size: 1rem;
+        }
+    
+        button {
+            font-size: 0.9rem;
+            padding: 0.4em 0.8em;
+        }
+    
+        #main {
+            padding: 0.3em;
+        }
+    }

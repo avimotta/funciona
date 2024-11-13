@@ -5,6 +5,7 @@ const reinitTateti = document.getElementById("reinit-tateti");
 const goBackTateti = document.getElementById("go-back-tateti");
 const modalGanaste = document.getElementById("modal-ganaste-tateti");
 const ganadorTexto = document.getElementById("ganador-texto-tateti");
+const goBack = document.getElementById("btn-g1-back");
 
 const winConditions = [
     [0, 1, 2],
@@ -40,6 +41,9 @@ function handleCellClick(event) {
     if (gameOver || cell.textContent !== "") {
         return;
     }
+
+    goBack.disabled = true;
+
     cell.textContent = jugador;
     cell.classList.add('bloqueada');
 
@@ -94,6 +98,7 @@ function resetGame() {
     jugador = tirarMoneda();
     gameOver = false; // Restablece el estado de juego para que no esté bloqueado
     resetButton.disabled = false; // Asegura que el botón de reset esté habilitado
+    goBack.disabled = false;
 }
 
 function hideAllSections() {

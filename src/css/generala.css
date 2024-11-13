@@ -11,12 +11,10 @@
     align-items: center;
     justify-content: center; /* Para centrar verticalmente */
     background-color: var(--coral-pink);
-    padding: 0.5em 2em;
+    padding: 0.5em 1em;
     border-radius: 20px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     text-align: center;
-    margin: 0 auto; /* Centrado horizontal */
-    width: 90%;
     margin: 0 auto;
     border: 3px solid #71a497;
 }
@@ -61,6 +59,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 0.3em;
+    border: 3px solid #FFD700;
 }
 
 #g2 .scores table tbody tr {
@@ -137,7 +136,6 @@ table {
 }
 
 #g2 .scores table {
-    width: 90%;
     font-size: 14px;
     align-items: center;
     justify-content: center;
@@ -146,7 +144,7 @@ table {
 
 #g2 .scores table th,
 #g2 .scores table td {
-    padding: 0.03em 1.50em;
+    padding: 0.15em 1.50em;
     border: 2px solid var(--coral-pink);
     color: var(--dark-text);
     font-size: 1.5em;
@@ -155,4 +153,66 @@ table {
 #g2 .scores table tbody tr td {
     color: var(--coral-pink);
     text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
+}
+
+#header-generala {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    position: relative;
+}
+
+/* Horizontal mode styles */
+@media (orientation: landscape) {
+
+    #g2 {
+        padding: 0.3em 3em;
+    }
+
+    #generala {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .container-generala {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1em;
+    }
+
+    #roll-btn {
+        width: 100%;
+        margin: 0 1em;
+        margin-top: 0.7em;
+    }
+
+    .scores {
+        width: 100%;
+        text-align: left;
+    }
+
+    #g2 .scores table {
+        width: 100%;
+        margin: 1em;
+        margin-top: 0;
+    }
+
+    #g2 .scores table th,
+    #g2 .scores table td {
+        padding: 0.5em 2em; /* Ajusta estos valores según necesites */
+        border: 2px solid var(--coral-pink);
+        color: var(--dark-text);
+        font-size: 0.75em;
+    }
+
+    #titulo-generala {
+        margin-top: 2em;
+    }
+    
+    #controles {
+        width: 100%; /* Asegura que el botón ocupe toda la fila */
+        display: flex;
+        justify-content: center;
+        margin-top: 1em; /* Espacio entre los dados y el botón */
+    }
 }

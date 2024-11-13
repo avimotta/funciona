@@ -13,16 +13,17 @@
 </head>
 <body>
     <div id="main">
-        <h2>mis juegos</h2>
+        <h1>mis juegos</h1>
         <button class="btn" id="btn-g1">ta-te-ti</button>
         <button class="btn" id="btn-g2">generala</button>
         <button class="btn" id="btn-g3">próximamente</button>
     </div>
     
     <div id="g1" class="game nodisp">
-        <button id="btn-g1-back">volver</button>
-
-        <h1>ta-te-ti</h1>
+        <div id="header-tateti">
+            <button id="btn-g1-back">volver</button>
+            <h2 id="titulo-tateti">ta-te-ti</h2>
+        </div>
     
         <p>turno de: <span id="jugador">x</span></p>
 
@@ -40,7 +41,7 @@
     
         <div  class="modal-ganaste-tateti" id="modal-ganaste-tateti">
             <div class="modal-content">
-                <h1>¡juego terminado!</h1>
+                <h2>¡juego terminado!</h2>
                 <p id="ganador-texto-tateti"></p>
                 <button id="reinit-tateti">reiniciar</button>
                 <button id="go-back-tateti">volver</button>
@@ -51,22 +52,25 @@
     </div>
 
     <div id="g2" class="game nodisp">
-        <div class="game-cont">
-            <button id="btn-g2-back">volver</button>
-            <h1>generala</h1>
-        
-            <p id="turno">turno de: <span id="player-generala">1</span>, tiros: <span id="moves-generala"></span></p>
+        <div id="generala" class="game-cont">
+            <div id="jugar-generala">
+                <div id="header-generala">
+                    <button id="btn-g2-back">volver</button>
+                    <h2 id="titulo-generala">generala</h2>
+                </div>
             
-            <div class="container-generala">
-                <div class="dados dado-1"></div>
-                <div class="dados dado-2"></div>
-                <div class="dados dado-3"></div>
-                <div class="dados dado-4"></div>
-                <div class="dados dado-5"></div>
-            </div>
-
-            <div id="controles">
-                <button id="roll-btn">¡tirá los dados!</button>
+                <p id="turno">turno de: <span id="player-generala">1</span>, tiros: <span id="moves-generala"></span></p>
+                
+                <div class="container-generala">
+                    <div class="dados dado-1"></div>
+                    <div class="dados dado-2"></div>
+                    <div class="dados dado-3"></div>
+                    <div class="dados dado-4"></div>
+                    <div class="dados dado-5"></div>
+                </div>
+                <div id="controles">
+                    <button id="roll-btn">¡tirá los dados!</button>
+                </div>
             </div>
             <div class="scores">
                 <table>
@@ -101,8 +105,8 @@
     <div class="modal-confirm-generala" id="modal-confirm-generala">
         <div class="modal-content">
           <p id="modal-confirm-message">¿querés tachar acá?</p>
-          <button id="confirm-add-x">Sí</button>
-          <button id="cancel-add-x">No</button>
+          <button id="confirm-add-x">sí</button>
+          <button id="cancel-add-x">no</button>
         </div>
       </div>
 
