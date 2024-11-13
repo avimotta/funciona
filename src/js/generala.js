@@ -1,4 +1,4 @@
-const DICE_SIZE = 100;
+const DICE_SIZE = 55;
 const DOT_RADIUS = 0.1 * DICE_SIZE;
 const AT_QUARTER = 0.25 * DICE_SIZE;
 const AT_HALF = 0.5 * DICE_SIZE;
@@ -54,6 +54,8 @@ const initGame = () => {
         diceElement.addEventListener("click", () => toggleDiceSelection(i));
     });
 
+    document.getElementById("roll-btn").removeAttribute("disabled");
+
     drawDices();
     drawState();
     drawScores();
@@ -108,7 +110,7 @@ const drawScores = () => {
        
                 if (score === 0) {
                     modalConfirm.style.display = "block";
-                    modalConfirmMessage.innerHTML = `No tiene el juego ${getGameName(j)}. ¿Quiere tacharlo?`;
+                    modalConfirmMessage.innerHTML = `no tenés el juego ${getGameName(j)}, ¿querés tacharlo?`;
                    
                     confirmAddX.onclick = () => {
                         modalConfirm.style.display = "none";
@@ -213,35 +215,35 @@ const calcScore = whichGame => {
     switch (whichGame) {
         case 6:
             if (isGameMatch(reEscalera)) {
-                score = game.moves === 2 ? 25 : 20;
+                score = game.moves === 1 ? 25 : 20;
             }
             //coincide con reEscalera
             //y primer tiro, devuelve 25, sino 20
             break;
         case 7:
             if (isGameMatch(reFull)) {
-                score = game.moves === 2 ? 35 : 30;
+                score = game.moves === 1 ? 35 : 30;
             }
             //coincide con reFull
             //y primer tiro, devuelve 35, sino 30
             break;
         case 8:
             if (isGameMatch(rePoker)) {
-                score = game.moves === 2 ? 45 : 40;
+                score = game.moves === 1 ? 45 : 40;
             }
             //coincide con rePoker
             //y primer tiro, devuelve 45, sino 40
             break;
         case 9:
             if (isGameMatch(reGenerala)) {
-                score = game.moves === 2 ? 55 : 50;
+                score = game.moves === 1 ? 55 : 50;
             }
             //coincide con reGenerala
             //y primer tiro, devuelve 55, sino 50
             break;
         case 10:
             if (isGameMatch(reGenerala)) {
-                score = game.moves === 2 ? 100 : 105;
+                score = game.moves === 1 ? 100 : 105;
             }
             //coincide con reGenerala
             //y primer tiro, devuelve 100, sino 105
@@ -298,11 +300,11 @@ const changeTurn = () => {
         game.turn = 1;
         game.round++;
         console.log(`${game.round}`);
-        if (game.round === 12) {
+        if (game.round === 12 || isGameMatch(reGenerala) && game.moves == 1 && getGameName(j) === "G") {
             gameOver();
         };
     };
-    document.getElementById("roll-btn").removeAttribute("disabled" );
+    document.getElementById("roll-btn").removeAttribute("disabled");
     drawDices();
     drawState();
 };
@@ -326,8 +328,8 @@ const gameOver = () => {
     }
 
     const mensajeGanador = empate
-        ? `¡Es un empate con ${winningScore} puntos!`
-        : `Ganó el Jugador ${winner + 1} con ${winningScore} puntos`;
+        ? `es un empate con ${winningScore} puntos`
+        : `¡ganó el jugador ${winner + 1} con ${winningScore} puntos! :)`;
 
     document.getElementById("ganador-texto").innerHTML = mensajeGanador;
     modalGanaste.style.display = "block";

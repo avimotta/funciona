@@ -7,10 +7,11 @@
 
 #g1 {
     background-color: var(--coral-pink);
-    padding: 2em;
     border-radius: 20px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     text-align: center;
+    padding: 0.5em;
+    border: 3px solid #71a497;
 }
 
 #tablero {
@@ -18,11 +19,11 @@
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);
     gap: 10px;
-    margin: 20px auto;
+    margin: 0.5em auto;
     width: max-content;
     background-color: var(--dark-text);
     padding: 10px;
-    border-radius: 15px;
+    border-radius: 20px;
 }
 
 .celda {
@@ -34,7 +35,7 @@
     justify-content: center;
     cursor: pointer;
     box-sizing: border-box;
-    border-radius: 10px;
+    border-radius: 20px;
     transition: background-color 0.3s ease;
 }
 

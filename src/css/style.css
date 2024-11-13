@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Asegura que los paddings no inflen los tamaños */
+}
+
 :root {
   --mint-green: #7DCEA0;
   --coral-pink: #F48B89;
@@ -33,6 +39,11 @@ h2 {
   text-shadow: 2px 3px 0px rgba(0, 0, 0, 0.2);
 }
 
+p {
+  color: var(--dark-text); 
+  margin-bottom: 0.5em;
+}
+
 button {
   background: repeating-linear-gradient(
       45deg,
@@ -42,13 +53,13 @@ button {
       #FFD700 20px
   );
   border: none;
-  padding: 12px 24px;
+  padding: 0.3em 1em;
   border-radius: 25px;
   font-family: 'Sen', sans-serif;
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
-  margin: 10px;
+  margin: 0.2em;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
