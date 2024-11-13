@@ -9,7 +9,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Para centrar verticalmente */
+    justify-content: center; 
     background-color: var(--coral-pink);
     padding: 0.5em 1em;
     border-radius: 20px;
@@ -20,15 +20,15 @@
 }
 
 .container-generala {
-    display: grid; /* Más controlado que flexbox para esta estructura */
-    grid-template-columns: repeat(3, 1fr); /* Tres columnas iguales */
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
     gap: 0.1em;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
+    justify-content: center; 
+    align-items: center; 
 }
 
 .dado {
-    width: 50px; /* Ajusta según tu diseño */
+    width: 50px; 
     height: 50px;
     border-radius: 10px;
     display: flex;
@@ -36,8 +36,6 @@
     align-items: center;
     font-size: 20px;
     font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
@@ -49,25 +47,14 @@
 }
 
 #roll-btn {
-    display: block; /* Asegura que tome todo el ancho disponible */
-    margin: 1em auto; /* Centra horizontalmente */
+    display: block;
+    margin: 1em auto;
     width: 70%;
-    padding: 10px;
-    font-size: 16px;
+    padding: 0.625em;
     color: var(--dark-text);
     border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
     margin-top: 0.3em;
     border: 3px solid #FFD700;
-}
-
-#g2 .scores table tbody tr {
-    cursor: pointer;
-}
-
-#g2 .scores table tbody tr:last-of-type td{
-    cursor: default;
 }
 
 .close-btn {
@@ -77,13 +64,12 @@
     position: absolute;
     top: 10px;
     right: 25px;
-  }
+}
 
 .close-btn:hover,
 .close-btn:focus {
   color: black;
   text-decoration: none;
-  cursor: pointer;
 }
 
 .modal-ganaste-generala,
@@ -109,7 +95,6 @@
 #modal-confirm .close 
 #modal-tachar .close,
 #modal-anotar .close {
-    cursor: pointer;
     position: absolute;
     top: 10px;
     right: 10px;
@@ -122,17 +107,15 @@
 }
 
 .potential-score {
-    background-color: var(--mint-green);  /* Light green background */
-    cursor: pointer;            /* Show clickable cursor */
-    transition: all 0.3s;       /* Smooth transition for hover effect */
+    background-color: var(--mint-green);
 }
 
 table {
-    margin: 0 auto; /* Centra horizontalmente */
+    margin: 0 auto; 
     border-collapse: collapse;
     border-radius: 2em;
     background-color: var(--cream-yellow);
-    margin-top: 0.5em; /* Ajustar separación superior */
+    margin-top: 0.5em;
 }
 
 #g2 .scores table {
@@ -162,7 +145,6 @@ table {
     position: relative;
 }
 
-/* Horizontal mode styles */
 @media (orientation: landscape) {
 
     #g2 {
@@ -199,20 +181,20 @@ table {
 
     #g2 .scores table th,
     #g2 .scores table td {
-        padding: 0.5em 2em; /* Ajusta estos valores según necesites */
+        padding: 0.5em 2em; 
         border: 2px solid var(--coral-pink);
         color: var(--dark-text);
         font-size: 0.75em;
     }
 
     #titulo-generala {
-        margin-top: 2em;
+        margin-top: 2.5em;
     }
     
     #controles {
-        width: 100%; /* Asegura que el botón ocupe toda la fila */
+        width: 100%;
         display: flex;
         justify-content: center;
-        margin-top: 1em; /* Espacio entre los dados y el botón */
+        margin-top: 1em;
     }
 }

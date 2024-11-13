@@ -17,13 +17,13 @@
 
 #tablero {
     display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
-    gap: 10px;
+    grid-template-columns: repeat(3, 90px);
+    grid-template-rows: repeat(3, 90px);
+    gap: 0.625em;
     margin: 0.5em auto;
     width: max-content;
     background-color: var(--dark-text);
-    padding: 10px;
+    padding: 0.625em;
     border-radius: 20px;
 }
 
@@ -37,7 +37,6 @@
     cursor: pointer;
     box-sizing: border-box;
     border-radius: 20px;
-    transition: background-color 0.3s ease;
 }
 
 .celda:hover {
@@ -45,21 +44,7 @@
 }
 
 .celdas-ganadoras {
-    background-color: #90EE90 !important;
-}
-
-.celda.bloqueada {
-    cursor: not-allowed;
-}
-
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+    background-color: var(--mint-green) !important;
 }
 
 .modal-ganaste-tateti {
@@ -67,19 +52,19 @@ button:disabled {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     background-color: var(--cream-yellow);
-    padding: 2rem;
+    padding: 2em;
     border-radius: 20px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     text-align: center;
+    transform: translate(-50%, -50%);
 }
 
 #ganador-texto-tateti {
-    font-size: 1.5rem;
+    font-size: 1.5em;
     color: var(--dark-text);
-    margin: 1rem 0;
+    margin: 1em 0;
 }
 
 .nodisp {
@@ -89,26 +74,26 @@ button:disabled {
 #jugador {
     font-weight: bold;
     color: var(--dark-text);
-    font-size: 1.2rem;
+    font-size: 1.2em;
 }
 
 #header-tateti {
     display: flex;
     align-items: center;
-    justify-content: center; /* Centra el título "Tateti" */
+    justify-content: center; 
     position: relative;
 }
 
 @media (orientation: landscape) {
         #g1 {
             padding: 0.3em;
-            font-size: 0.8rem;
+            font-size: 0.8em;
             border-radius: 15px;
         }
     
         #tablero {
-            grid-template-columns: repeat(3, 80px);
-            grid-template-rows: repeat(3, 80px);
+            grid-template-columns: repeat(3, 70px);
+            grid-template-rows: repeat(3, 70px);
             gap: 5px;
             padding: 5px;
         }
@@ -119,21 +104,21 @@ button:disabled {
         }
     
         .modal-ganaste-tateti {
-            padding: 1.5rem;
-            font-size: 1.2rem;
+            padding: 1.5em;
+            font-size: 1.2em;
         }
     
         #ganador-texto-tateti {
-            font-size: 1.2rem;
-            margin: 0.5rem 0;
+            font-size: 1.2em;
+            margin: 0.5em 0;
         }
     
         #jugador {
-            font-size: 1rem;
+            font-size: 1em;
         }
     
         button {
-            font-size: 0.9rem;
+            font-size: 0.9em;
             padding: 0.4em 0.8em;
         }
     

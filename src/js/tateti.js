@@ -37,7 +37,7 @@ function changeTurn() {
 }
 
 function handleCellClick(event) {
-    const cell = event.target;
+    const cell = event.target; // identifica celda tocada
     if (gameOver || cell.textContent !== "") {
         return;
     }
@@ -94,10 +94,10 @@ function resetGame() {
         cell.classList.remove('bloqueada');
         cell.classList.remove('celdas-ganadoras');
     });
-    modalGanaste.style.display = "none"; // Oculta el modal al reiniciar
+    modalGanaste.style.display = "none";
     jugador = tirarMoneda();
-    gameOver = false; // Restablece el estado de juego para que no esté bloqueado
-    resetButton.disabled = false; // Asegura que el botón de reset esté habilitado
+    gameOver = false;
+    resetButton.disabled = false;
     goBack.disabled = false;
 }
 
@@ -121,5 +121,4 @@ goBackTateti.onclick = () => {
     resetGame();
 };
 
-// Inicializa el juego
-resetButton.disabled = false; // Habilita el botón de reset al cargar la página
+resetButton.disabled = false; //habilitar botón

@@ -1,4 +1,4 @@
-const DICE_SIZE = 55;
+const DICE_SIZE = 50;
 const DOT_RADIUS = 0.1 * DICE_SIZE;
 const AT_QUARTER = 0.25 * DICE_SIZE;
 const AT_HALF = 0.5 * DICE_SIZE;
@@ -49,7 +49,7 @@ const initGame = () => {
         diceElement.parentNode.replaceChild(newElement, diceElement);
     });
 
-    // agregar nuevos listeners a las nuevas copias
+    // agregar nuevos listeners a las nuevas copias pq sino no funcionaba reiniciar
     document.querySelectorAll(".container-generala .dados").forEach((diceElement, i) => {
         diceElement.addEventListener("click", () => toggleDiceSelection(i));
     });
@@ -106,7 +106,7 @@ const drawScores = () => {
                 modalOcupado.style.display = "block";
                 return;
             } else {
-                const score = calcScore(j); // Cambia calcScore por calculateScore si es necesario
+                const score = calcScore(j); 
        
                 if (score === 0) {
                     modalConfirm.style.display = "block";
@@ -114,7 +114,7 @@ const drawScores = () => {
                    
                     confirmAddX.onclick = () => {
                         modalConfirm.style.display = "none";
-                        game.scores[game.turn - 1][j] = "X"; // Marca como tachado
+                        game.scores[game.turn - 1][j] = "X";
                         changeTurn();
                         drawScores();
                     };
@@ -133,12 +133,11 @@ const drawScores = () => {
                    
                     } else {
                     if (getGameName(j) === "D" && game.scores[game.turn - 1][9] === " ") {
-                        // Show modal to indicate that Generala must be scored first
                         modalAnotar.style.display = "block";
                         document.querySelector(".modal-anotar-generala .close").onclick = function() {
                             document.getElementById("modal-anotar-generala").style.display = "none";
                         };
-                        return; // Prevent scoring until user closes modal
+                        return;
                     } else {
                         game.scores[game.turn - 1][j] = score;
                         game.scores[game.turn - 1][11] += score;
@@ -181,30 +180,21 @@ const isGameMatch = regex => {
 }
 
 const highlightPossibleScores = () => {
-    // Remove previous highlights
     document.querySelectorAll('.potential-score').forEach(cell => {
         cell.classList.remove('potential-score');
     });
 
-    // Only highlight if there are actual dice values (not all zeros)
     if (game.dices.some(dice => dice === 0)) return;
 
-    // Get all score cells for current player
     const scoreCells = document.querySelectorAll('#g2 .scores table tbody tr');
     
-    // Check each possible game (0-10)
     scoreCells.forEach((row, index) => {
-        if (index >= 11) return; // Skip total row
-        
-        // Get the cell for current player
-        const playerCell = row.children[game.turn];
-        
-        // Only proceed if the cell is empty (contains space)
-        if (playerCell && playerCell.textContent.trim() === "") {
+        if (index >= 11) return; 
+        const playerCell = row.children[game.turn]; //encontrar celda del jugador actual
+        if (playerCell && playerCell.textContent.trim() === "") { //verifica q esté vacía
             const score = calcScore(index);
-            if (score > 0) { // Only highlight if there's a positive score
+            if (score > 0) { 
                 playerCell.classList.add('potential-score');
-                // Optionally show the potential score
             }
         }
     });
@@ -365,7 +355,7 @@ const getGameName = whichGame => {
     return games[whichGame];
 };
  
-//alternar selección de dado específico cuando usuario hace clic, toggleDiceSelection está específicamente para manejar la interacción directa con cada dado cuando el usuario lo selecciona o deselecciona. Sin él, la interfaz no podría reflejar cuáles dados están "congelados" y cuáles no, y no se podría personalizar qué dados lanzar en la siguiente tirada.
+//alterna selección de dado específico cuando usuario hace clic
 const toggleDiceSelection = diceNumber => {
     game.selectedDices[diceNumber] = !game.selectedDices[diceNumber];
     const diceElement = document.querySelector(`.container-generala .dado-${diceNumber + 1}`);
@@ -386,7 +376,6 @@ const showDices = (contDiv, number) => {
     contDiv.appendChild(img);
 };
 
-/* Draw dices code begins */
 const drawDot = (ctx, x, y) => {
     ctx.beginPath();
     ctx.arc(x, y, DOT_RADIUS, 0, 2 * Math.PI, false);
@@ -406,27 +395,24 @@ const showDice = (contDiv, number) => {
  
 const drawDice = (cont, number) => {
     let ctx = cont.getContext("2d");
-    const radius = 20; // Radio de las esquinas redondeadas
+    const radius = 20; 
  
-    // Borro
     ctx.clearRect(0, 0, DICE_SIZE, DICE_SIZE);
  
-    // Dibujo el dado con bordes redondeados
     ctx.beginPath();
-    ctx.moveTo(radius, 0); // Esquina superior izquierda
-    ctx.lineTo(DICE_SIZE - radius, 0); // Línea superior
-    ctx.arcTo(DICE_SIZE, 0, DICE_SIZE, radius, radius); // Esquina superior derecha
-    ctx.lineTo(DICE_SIZE, DICE_SIZE - radius); // Línea derecha
-    ctx.arcTo(DICE_SIZE, DICE_SIZE, DICE_SIZE - radius, DICE_SIZE, radius); // Esquina inferior derecha
-    ctx.lineTo(radius, DICE_SIZE); // Línea inferior
-    ctx.arcTo(0, DICE_SIZE, 0, DICE_SIZE - radius, radius); // Esquina inferior izquierda
-    ctx.lineTo(0, radius); // Línea izquierda
-    ctx.arcTo(0, 0, radius, 0, radius); // Esquina superior izquierda
+    ctx.moveTo(radius, 0);
+    ctx.lineTo(DICE_SIZE - radius, 0);
+    ctx.arcTo(DICE_SIZE, 0, DICE_SIZE, radius, radius); 
+    ctx.lineTo(DICE_SIZE, DICE_SIZE - radius); 
+    ctx.arcTo(DICE_SIZE, DICE_SIZE, DICE_SIZE - radius, DICE_SIZE, radius); 
+    ctx.lineTo(radius, DICE_SIZE); 
+    ctx.arcTo(0, DICE_SIZE, 0, DICE_SIZE - radius, radius); 
+    ctx.lineTo(0, radius); 
+    ctx.arcTo(0, 0, radius, 0, radius); 
     ctx.fillStyle = "#FFE5B4";
     ctx.fill();
     ctx.closePath();
  
-    // Dibujo los puntos según el número
     switch (number) {
         case 1:
             drawDot(ctx, AT_HALF, AT_HALF);
@@ -462,8 +448,6 @@ const drawDice = (cont, number) => {
             drawDot(ctx, AT_3QUARTER, AT_HALF);
     }
 };
-
-/* Draw dices code ends */
 
 document.getElementById("roll-btn").addEventListener("click", rollDices);
 
