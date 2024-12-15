@@ -6,9 +6,11 @@
 
 :root {
   --mint-green: #7DCEA0;
-  --coral-pink: #F48B89;
+  --cream-green: #c3eecc;
+  --coral-pink: #f56563;
   --cream-yellow: #FFE5B4;
   --dark-text: #333333;
+  --yellow: #FFD700;
 }
 
 html, body {
@@ -31,6 +33,7 @@ h1 {
   font-family: 'Sour Gummy', sans-serif;
   font-size: 2.5em;
   text-shadow: 2px 3px 0px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
 }
 
 h2 {
@@ -50,24 +53,23 @@ button {
       45deg,
       var(--cream-yellow),
       var(--cream-yellow) 10px,
-      #FFD700 10px,
-      #FFD700 20px
+      var(--yellow) 10px,
+      var(--yellow) 20px
   );
   border: none;
-  padding: 0.3em 1em;
+  padding: 0.5em;
   border-radius: 25px;
   font-family: 'Sen', sans-serif;
   font-weight: bold;
-  font-size: 1em;
+  font-size: 0.9em;
   margin: 0.2em;
-  border: 3px solid #FFD700;
+  border: 3px solid var(--yellow);
 }
 
 button:disabled {
   background: #D1D1D1;
   border-color: #A0A0A0;
   color: #888;
-  cursor: not-allowed;
   box-shadow: 
       0 4px 0 #A0A0A0,
       0 5px 5px rgba(0, 0, 0, 0.1);
@@ -76,13 +78,19 @@ button:disabled {
 #main {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #ff8381; 
+  background-color: var(--coral-pink); 
   padding: 2.5em;
   border-radius: 20px;
   border: 3px solid #71a497;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+}
+
+#juegos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn {
@@ -105,14 +113,34 @@ button:disabled {
   position: absolute;
   left: 0.1em;
   padding: 0.3em;
+  top: 1em;
 }
 
+#btn-g3-back {
+  position: absolute;
+  top: 0.1em;
+  left: 0.3em;
+  padding: 0.3em;
+}
+
+
+
 @media (orientation: landscape) {
-  #main {
-    padding: 0.5em;
+  #juegos {
+    display: flex; /* Organizar los elementos en fila */
+    flex-direction: row; /* Asegura que estén uno al lado del otro */
+    gap: 1em; /* Espacio entre juegos */
+    justify-content: center; /* Centrar los juegos horizontalmente */
+    align-items: flex-start; /* Alinear verticalmente */
+    padding: 1em;
   }
 
   button {
     margin: 0;
   }
+
+  #btn-g1-back {
+    font-size: 1.1em;
+  }
+  
 }

@@ -379,7 +379,7 @@ const showDices = (contDiv, number) => {
 const drawDot = (ctx, x, y) => {
     ctx.beginPath();
     ctx.arc(x, y, DOT_RADIUS, 0, 2 * Math.PI, false);
-    ctx.fillStyle = "#F48B89";
+    ctx.fillStyle = "#f56563";
     ctx.fill();
     ctx.closePath();
 }
@@ -395,7 +395,7 @@ const showDice = (contDiv, number) => {
  
 const drawDice = (cont, number) => {
     let ctx = cont.getContext("2d");
-    const radius = 20; 
+    const radius = 10; 
  
     ctx.clearRect(0, 0, DICE_SIZE, DICE_SIZE);
  

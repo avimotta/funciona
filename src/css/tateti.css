@@ -1,9 +1,3 @@
-:root {
-    --mint-green: #7DCEA0;
-    --coral-pink: #F48B89;
-    --cream-yellow: #FFE5B4;
-    --dark-text: #333333;
-}
 
 #g1 {
     background-color: var(--coral-pink);
@@ -34,13 +28,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
     box-sizing: border-box;
     border-radius: 20px;
 }
 
 .celda:hover {
-    background-color: #FFD700;
+    background-color: var(--yellow);
 }
 
 .celdas-ganadoras {
@@ -50,15 +43,28 @@
 .modal-ganaste-tateti {
     display: none;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    background-color: var(--cream-yellow);
-    padding: 2em;
+    top: 0;
+    left: 0;
+    width: 100vw; 
+    height: 100vh; 
+    background-color: rgba(237, 237, 237, 0.154); 
+    backdrop-filter: blur(5px);
+    padding: 1em;
     border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     text-align: center;
-    transform: translate(-50%, -50%);
+}
+
+.modal-ganaste-tateti .modal-content {
+    background-color: var(--cream-yellow); /* Fondo del modal */
+    border-radius: 20px;
+    text-align: center;
+    align-items: center;
+    padding: 1em;
+    width: 90%;
+    max-width: 400px; 
+    border: 2px solid var(--yellow);
+    margin: 0 auto;
 }
 
 #ganador-texto-tateti {
@@ -82,20 +88,27 @@
     align-items: center;
     justify-content: center; 
     position: relative;
+    flex-direction: column;
+}
+
+#reset {
+    font-size: 1.2em;
 }
 
 @media (orientation: landscape) {
         #g1 {
-            padding: 0.3em;
+            padding: 0.1em 5em;
             font-size: 0.8em;
             border-radius: 15px;
+            display:flex;
+            flex-direction: row;
         }
     
         #tablero {
-            grid-template-columns: repeat(3, 70px);
-            grid-template-rows: repeat(3, 70px);
-            gap: 5px;
-            padding: 5px;
+            grid-template-columns: repeat(3, 85px);
+            grid-template-rows: repeat(3, 85px);
+            gap: 10px;
+            padding: 10px;
         }
     
         .celda {
@@ -117,12 +130,20 @@
             font-size: 1em;
         }
     
-        button {
-            font-size: 0.9em;
-            padding: 0.4em 0.8em;
-        }
-    
         #main {
             padding: 0.3em;
+        }
+
+        #header-tateti {
+            flex-direction: column;
+            padding: 2em;
+        }
+
+        #titulo-tateti {
+            font-size: 2em;
+        }
+
+        #turno-tateti {
+            font-size: larger;
         }
     }

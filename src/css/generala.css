@@ -1,10 +1,3 @@
-:root {
-    --mint-green: #7DCEA0;
-    --coral-pink: #F48B89;
-    --cream-yellow: #FFE5B4;
-    --dark-text: #333333;
-}
-
 #g2 {
     display: flex;
     flex-direction: column;
@@ -17,12 +10,16 @@
     text-align: center;
     margin: 0 auto;
     border: 3px solid #71a497;
+    max-width: 350px;
+    min-width: 350px;
+    max-height: 750px;
+    min-height: 750px;
 }
 
 .container-generala {
     display: grid; 
     grid-template-columns: repeat(3, 1fr); 
-    gap: 0.1em;
+    gap: 0.05em;
     justify-content: center; 
     align-items: center; 
 }
@@ -34,27 +31,39 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 20px;
+    font-size: 1.1em;
     font-weight: bold;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.dados {
+    background-color: #f000;
+    border-radius: 1em;
+    padding: 0.5em;
 }
 
 .dadosSeleccionados {
     background-color: var(--mint-green);
     border-radius: 1em;
-    padding: 0.1em;
-    border: 3px solid #71a497;
+    padding: 0.5em;
 }
 
 #roll-btn {
     display: block;
-    margin: 1em auto;
-    width: 70%;
+    width: 100%;
     padding: 0.625em;
     color: var(--dark-text);
     border: none;
-    margin-top: 0.3em;
-    border: 3px solid #FFD700;
+    border: 3px solid var(--yellow);
+}
+
+#roll-btn:disabled {
+    background: #D1D1D1;
+  border-color: #A0A0A0;
+  color: #888;
+  box-shadow: 
+      0 4px 0 #A0A0A0,
+      0 5px 5px rgba(0, 0, 0, 0.1);
 }
 
 .close-btn {
@@ -79,30 +88,38 @@
 .modal-anotar-generala {
     display: none;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: var(--cream-yellow);
+    top: 0;
+    left: 0;
+    width: 100vw; 
+    height: 100vh; 
+    background-color: rgba(237, 237, 237, 0.154); 
+    backdrop-filter: blur(5px);
     padding: 1em;
     border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 
-#modal-ganaste .close,
-#modal-ocupado .close,
-#modal-confirm .close 
-#modal-tachar .close,
-#modal-anotar .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 18px;
+.modal-ganaste-generala .modal-content,
+.modal-ocupado-generala .modal-content,
+.modal-confirm-generala .modal-content,
+.modal-tachar-generala .modal-content,
+.modal-anotar-generala .modal-content {
+    background-color: var(--cream-yellow); /* Fondo del modal */
+    border-radius: 20px;
+    text-align: center;
+    align-items: center;
+    padding: 1em;
+    width: 90%;
+    max-width: 400px; 
+    border: 2px solid var(--yellow);
+    margin: 0 auto;
 }
 
 .markPlayerTurn {
-    background-color: #FFD700; 
+    background-color: var(--yellow);
     font-weight: bold;
 }
 
@@ -116,6 +133,15 @@ table {
     border-radius: 2em;
     background-color: var(--cream-yellow);
     margin-top: 0.5em;
+    max-width: 100px;
+    min-width: 100px;
+    max-height: 200px;
+    min-height: 200px;
+}
+
+#confirm-add-x,
+#cancel-add-x {
+    padding: 0.7em;
 }
 
 #g2 .scores table {
@@ -128,14 +154,14 @@ table {
 #g2 .scores table th,
 #g2 .scores table td {
     padding: 0.15em 1.50em;
-    border: 2px solid var(--coral-pink);
+    border: 1px solid var(--coral-pink);
     color: var(--dark-text);
     font-size: 1.5em;
 }
 
 #g2 .scores table tbody tr td {
     color: var(--coral-pink);
-    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
 }
 
 #header-generala {
@@ -143,12 +169,16 @@ table {
     align-items: center;
     justify-content: center; 
     position: relative;
+    margin-top: 0;
 }
 
 @media (orientation: landscape) {
-
     #g2 {
         padding: 0.3em 3em;
+        max-width: 750px;
+        min-width: 750px;
+        max-height: 350px;
+        min-height: 350px;
     }
 
     #generala {
@@ -157,15 +187,12 @@ table {
     }
     
     .container-generala {
-        display: flex;
-        flex-wrap: wrap;
         gap: 1em;
     }
 
     #roll-btn {
         width: 100%;
         margin: 0 1em;
-        margin-top: 0.7em;
     }
 
     .scores {
@@ -174,17 +201,14 @@ table {
     }
 
     #g2 .scores table {
-        width: 100%;
         margin: 1em;
-        margin-top: 0;
     }
 
     #g2 .scores table th,
     #g2 .scores table td {
-        padding: 0.5em 2em; 
-        border: 2px solid var(--coral-pink);
+        padding: 0.1em 2em; 
         color: var(--dark-text);
-        font-size: 0.75em;
+        font-size: 1.2em;
     }
 
     #titulo-generala {
