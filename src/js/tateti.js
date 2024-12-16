@@ -121,4 +121,4 @@ goBackTateti.onclick = () => {
     resetGame();
 };
 
-resetButton.disabled = false; //habilitar botón
+resetButton.disabled = false;

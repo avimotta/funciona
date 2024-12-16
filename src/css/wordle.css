@@ -58,7 +58,7 @@ body {
   color: #888;
   box-shadow: 
       0 4px 0 #A0A0A0,
-      0 5px 5px rgba(0, 0, 0, 0.1);
+      0 1.5px 1.5px rgba(0, 0, 0, 0.1);
 }
 
 .key {
@@ -88,7 +88,7 @@ input[type="text"] {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(35px, 1fr));
   gap: 0.1em;
-  margin: 20px 0;
+  margin: 1em 0;
 }
 
 .key, #delete {
@@ -165,7 +165,7 @@ input[type="text"] {
 }
 
 .modal-fin-wordle .modal-content {
-    background-color: var(--cream-yellow); /* Fondo del modal */
+    background-color: var(--cream-yellow);
     border-radius: 20px;
     text-align: center;
     align-items: center;
@@ -174,4 +174,55 @@ input[type="text"] {
     max-width: 400px; 
     border: 2px solid var(--yellow);
     margin: 0 auto;
+}
+
+@media (orientation: landscape) {
+  #g3 {
+    max-width: 700px;
+    min-width: 700px;
+    max-height: 350px;
+    min-height: 350px;
+  }
+
+  input[type="text"] {
+    padding: 1px;
+  }
+
+  #header-y-grilla {
+    display: flex;
+    flex-direction: row;
+  }
+
+  #header-tateti {
+    width: 50%;
+  }
+
+  .key, 
+  #borrar-wordle {
+    height: 2.1em;
+    font-size: 0.9em;
+  }
+
+  #borrar-wordle {
+    padding: 0;
+  }
+
+  .grilla-adivinar {
+    gap: 2px;
+    margin-bottom: 10px;
+    width: 45%;
+  }
+  
+  .fila-palabra {
+    gap: 1px;
+  }
+  
+  .fila-palabra span {
+    width: 3em;
+    height: 1.9em;
+  }
+
+  #game-message-wordle {
+    font-size: 0.97em;
+  }
 }
