@@ -72,7 +72,7 @@ button:disabled {
   color: #888;
   box-shadow: 
       0 4px 0 #A0A0A0,
-      0 5px 5px rgba(0, 0, 0, 0.1);
+      0 1.5px 1.5px rgba(0, 0, 0, 0.1);
 }
 
 #main {
@@ -123,15 +123,13 @@ button:disabled {
   padding: 0.3em;
 }
 
-
-
 @media (orientation: landscape) {
   #juegos {
-    display: flex; /* Organizar los elementos en fila */
-    flex-direction: row; /* Asegura que estén uno al lado del otro */
-    gap: 1em; /* Espacio entre juegos */
-    justify-content: center; /* Centrar los juegos horizontalmente */
-    align-items: flex-start; /* Alinear verticalmente */
+    display: flex; 
+    flex-direction: row; 
+    gap: 1em; 
+    justify-content: center;
+    align-items: flex-start;
     padding: 1em;
   }
 
@@ -142,5 +140,9 @@ button:disabled {
   #btn-g1-back {
     font-size: 1.1em;
   }
-  
+
+  #btn-g3-back {
+    position: absolute;
+    top: 0.5em;
+  }
 }

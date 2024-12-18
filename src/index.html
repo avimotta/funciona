@@ -62,7 +62,7 @@
                     <h2 id="titulo-generala">generala</h2>
                 </div>
             
-                <p id="turno">turno de: <span id="player-generala">1</span>, tiros: <span id="moves-generala"></span></p>
+                <p id="turno">turno de: J<span id="player-generala">1</span>, tiros: <span id="moves-generala"></span></p>
                 
                 <div class="container-generala">
                     <div class="dados dado-1"></div>
@@ -97,7 +97,6 @@
     
     <div  class="modal-ganaste-generala" id="modal-ganaste-generala">
         <div class="modal-content">
-            <span class="close">&times;</span>
             <h2>¡juego terminado!</h2>
             <p id="ganador-texto"></p>
             <button id="reinit-generala">reiniciar</button>
@@ -128,13 +127,15 @@
     </div>
 
     <div id="g3" class="game nodisp">
+        <div id="header-y-grilla">
         <div id="header-tateti">
             <button id="btn-g3-back">volver</button>
             <h2 id="titulo-wordle">wordle</h2>
+            <div id="game-message-wordle"></div>
         </div>
-        <div id="game-message-wordle"></div>
         <div class="grilla-adivinar" id="grilla-adivinar">
               <!-- Aquí aparecerán las letras -->
+        </div>
         </div>
         <div class="controls-wordle">
             <input type="text" id="input-wordle" readonly />
@@ -143,45 +144,42 @@
                 <button class="key" data-letter="w">W</button>
                 <button class="key" data-letter="e">E</button>
                 <button class="key" data-letter="r">R</button>
-                 <button class="key" data-letter="t">T</button>
+                <button class="key" data-letter="t">T</button>
                 <button class="key" data-letter="y">Y</button>
-                    <button class="key" data-letter="u">U</button>
-                    <button class="key" data-letter="i">I</button>
-                    <button class="key" data-letter="o">O</button>
-                    <button class="key" data-letter="p">P</button>
-                    
-                    <!-- Segunda fila -->
-                    <button class="key" data-letter="a">A</button>
-                    <button class="key" data-letter="s">S</button>
-                    <button class="key" data-letter="d">D</button>
-                    <button class="key" data-letter="f">F</button>
-                    <button class="key" data-letter="g">G</button>
-                    <button class="key" data-letter="h">H</button>
-                    <button class="key" data-letter="j">J</button>
-                    <button class="key" data-letter="k">K</button>
-                    <button class="key" data-letter="l">L</button>
-                    
-                    <!-- Tercera fila -->
-                    <button class="key" data-letter="z">Z</button>
-                    <button class="key" data-letter="x">X</button>
-                    <button class="key" data-letter="c">C</button>
-                    <button class="key" data-letter="v">V</button>
-                    <button class="key" data-letter="b">B</button>
-                    <button class="key" data-letter="n">N</button>
-                    <button class="key" data-letter="m">M</button>
-                    <button id="borrar-wordle">borrar</button>
-                </div>
+                <button class="key" data-letter="u">U</button>
+                <button class="key" data-letter="i">I</button>
+                <button class="key" data-letter="o">O</button>
+                <button class="key" data-letter="p">P</button>
+                <button class="key" data-letter="a">A</button>
+                <button class="key" data-letter="s">S</button>
+                <button class="key" data-letter="d">D</button>
+                <button class="key" data-letter="f">F</button>
+                <button class="key" data-letter="g">G</button>
+                <button class="key" data-letter="h">H</button>
+                <button class="key" data-letter="j">J</button>
+                <button class="key" data-letter="k">K</button>
+                <button class="key" data-letter="l">L</button>
+                <button class="key" data-letter="z">Z</button>
+                <button class="key" data-letter="x">X</button>
+                <button class="key" data-letter="c">C</button>
+                <button class="key" data-letter="v">V</button>
+                <button class="key" data-letter="b">B</button>
+                <button class="key" data-letter="n">N</button>
+                <button class="key" data-letter="m">M</button>
+                <button id="borrar-wordle">borrar</button>
+            </div>
                 <button id="reinit-wordle">reiniciar</button>
                 <button id="enviar-wordle">adivinar</button>
-            </div>
+        </div>
 
-            <div class="modal-fin-wordle" id="modal-fin-wordle">
-                <div class="modal-content">
-                    <p id="fin-texto-wordle"></p>
-                    <button id="reiniciar-wordle">reiniciar</button>
-                    <button id="go-back-wordle">volver</button>
-                </div>
+        <div class="modal-fin-wordle" id="modal-fin-wordle">
+            <div class="modal-content">
+                <h2>¡juego terminado!</h2>
+                <p id="fin-texto-wordle"></p>
+                <button id="reiniciar-wordle">reiniciar</button>
+                <button id="go-back-wordle">volver</button>
             </div>
+        </div>
     </div>
     <script src="./js/app.js" type="module"></script>
     <script src="./js/tateti.js" type="module"></script>

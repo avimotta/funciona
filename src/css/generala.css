@@ -63,7 +63,7 @@
   color: #888;
   box-shadow: 
       0 4px 0 #A0A0A0,
-      0 5px 5px rgba(0, 0, 0, 0.1);
+      0 1.5px 1.5px rgba(0, 0, 0, 0.1);
 }
 
 .close-btn {
@@ -107,7 +107,7 @@
 .modal-confirm-generala .modal-content,
 .modal-tachar-generala .modal-content,
 .modal-anotar-generala .modal-content {
-    background-color: var(--cream-yellow); /* Fondo del modal */
+    background-color: var(--cream-yellow); 
     border-radius: 20px;
     text-align: center;
     align-items: center;
@@ -121,6 +121,11 @@
 .markPlayerTurn {
     background-color: var(--yellow);
     font-weight: bold;
+}
+
+.markPlayerTurnHeader {
+    background-color: var(--yellow);
+    border-radius: 2em;
 }
 
 .potential-score {

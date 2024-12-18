@@ -10,10 +10,12 @@ const confirmAddX = document.getElementById("confirm-add-x");
 const cancelAddX = document.getElementById("cancel-add-x");
 const reinitGenerala = document.getElementById("reinit-generala");
 const goBackGenerala = document.getElementById("go-back-generala");
+const btnRollDice = document.getElementById("roll-btn");
 const modalTachar = document.getElementById("modal-tachar-generala");
 const modalAnotar = document.getElementById("modal-anotar-generala");
 const modalGanaste = document.getElementById("modal-ganaste-generala");
 const modalOcupado = document.getElementById("modal-ocupado-generala");
+const back = document.getElementById("btn-g2-back");
 
 const game = {
     dices: [0, 0, 0, 0, 0],
@@ -54,7 +56,8 @@ const initGame = () => {
         diceElement.addEventListener("click", () => toggleDiceSelection(i));
     });
 
-    document.getElementById("roll-btn").removeAttribute("disabled");
+    btnRollDice.removeAttribute("disabled");
+    back.removeAttribute("disabled");
 
     drawDices();
     drawState();
@@ -73,6 +76,10 @@ const drawScores = () => {
         const cellPlayerName = document.createElement("th");
         cellPlayerName.innerHTML = `J${i + 1}`;
         contHeader.appendChild(cellPlayerName);
+
+        if (i === game.turn - 1) {
+            cellPlayerName.classList.add("markPlayerTurnHeader");
+        }
     }
 
     // juegos
@@ -176,7 +183,7 @@ const drawScores = () => {
 };
 
 const isGameMatch = regex => {
-    return game.dices.slice().sort((d1, d2) => d1 - d2).join("").match(regex) !== null;//hago una copia del array, lo ordena, lo convierte en un string y lo matchea con la expresion regular de la generala
+    return game.dices.slice().sort((d1, d2) => d1 - d2).join("").match(regex) !== null; //hago una copia del array, lo ordena, lo convierte en un string y lo matchea con la expresion regular de la generala
 }
 
 const highlightPossibleScores = () => {
@@ -273,8 +280,8 @@ const rollDices = () => {
     }
     drawDices();
     game.moves++;
-    if (game.moves === 1) document.getElementById("btn-g2-back").setAttribute("disabled", "disabled");
-    if (game.moves === 3) document.getElementById("roll-btn").setAttribute("disabled", "disabled");
+    if (game.moves === 1) back.setAttribute("disabled", "disabled");
+    if (game.moves === 3) btnRollDice.setAttribute("disabled", "disabled");
     drawState();
 
     highlightPossibleScores();
@@ -294,13 +301,13 @@ const changeTurn = () => {
             gameOver();
         };
     };
-    document.getElementById("roll-btn").removeAttribute("disabled");
+    btnRollDice.removeAttribute("disabled");
     drawDices();
     drawState();
 };
 
 const gameOver = () => {
-    document.getElementById("roll-btn").setAttribute("disabled", "disabled");
+    btnRollDice.setAttribute("disabled", "disabled");
 
     let winner = 0;
     let winningScore = game.scores[0][11]; // primero con el puntaje del primer jugador
@@ -335,10 +342,6 @@ const gameOver = () => {
         showSection("main");
         initGame();
     };
-};
-
-document.querySelector(".modal-ganaste-generala .close").onclick = function() {
-    modalGanaste.style.display = "none";
 };
 
 function hideAllSections() {
@@ -449,7 +452,7 @@ const drawDice = (cont, number) => {
     }
 };
 
-document.getElementById("roll-btn").addEventListener("click", rollDices);
+btnRollDice.addEventListener("click", rollDices);
 
 document.addEventListener("DOMContentLoaded", () => {
     initGame();
